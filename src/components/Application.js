@@ -54,7 +54,7 @@ export default function Application(props) {
     axios.get('/api/days').then(response => {
       setDays([...response.data]);
     })
-}, [days])
+}, [])
 
   const appointmentList = Object.values(appointments).map((appointment) =>
     <Appointment
