@@ -14,6 +14,24 @@ export function getAppointmentsForDay(state, day) {
 }
 
 
+export function getInterviewersForDay(state, day) {
+  const appts = [];
+  const result = [];
+  for (const d of state.days) {
+    if (d.name === day) {
+      appts.push(...d.appointments);
+      break;
+    }
+  }
+  for (let a of appts) {
+    if (state.appointments[a.toString()].interview) {
+      result.push(state.interviewers[state.appointments[a.toString()].interview.interviewer]);
+    }
+  }
+  return result;
+}
+
+
 export function getInterview(state, interview) {
   if (!interview) return null;
   const data = {};
