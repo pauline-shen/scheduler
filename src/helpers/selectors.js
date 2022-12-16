@@ -25,7 +25,8 @@ export function getInterviewersForDay(state, day) {
   }
   for (let a of appts) {
     if (state.appointments[a.toString()].interview) {
-      result.push(state.interviewers[state.appointments[a.toString()].interview.interviewer]);
+      let i = state.interviewers[state.appointments[a.toString()].interview.interviewer];
+      if (!result.includes(i)) result.push(i);
     }
   }
   return result;
