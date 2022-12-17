@@ -32,7 +32,7 @@ export default function Application(props) {
   }, [])
 
 
-  async function bookInterview(id, interview) {
+  function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -41,8 +41,7 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    console.log(interview)
-    return axios.put(`/api/appointments/${id}`, {interview})
+    return axios.put(`/api/appointments/${id}`, { interview })
       .then(() =>
         setState({
           ...state,
@@ -50,6 +49,23 @@ export default function Application(props) {
         }))
   }
 
+
+  function cancelInterview(id) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    return axios.delete(`/api/appointments/${id}`)
+      .then(() =>
+        setState({
+          ...state,
+          appointments
+        }))
+  }
 
   const appointmentList = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
@@ -62,6 +78,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={dailyInterviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });
