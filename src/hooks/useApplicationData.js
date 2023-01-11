@@ -35,6 +35,25 @@ export default function useApplicationData() {
   }
 
 
+  function updateInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    return axios.put(`/api/appointments/${id}`, { interview })
+      .then(() => {
+        return setState({
+          ...state,
+          appointments,
+        })
+      })
+  }
+
+
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -76,5 +95,5 @@ export default function useApplicationData() {
       })
   }
 
-  return { state, setDay, bookInterview, cancelInterview };
+  return { state, setDay, bookInterview, cancelInterview, updateInterview };
 }

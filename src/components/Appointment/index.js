@@ -42,6 +42,19 @@ export default function Appointment(props) {
   }
 
 
+  function update(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer
+    };
+    transition(SAVING);
+    props
+      .updateInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch(error => transition(ERROR_SAVE, true));
+  }
+
+
   function cancel() {
     transition(DELETING, true);
     props
@@ -85,7 +98,7 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer.id}
           onCancel={() => back()}
-          onSave={save}
+          onSave={update}
         />
       )}
       {mode === ERROR_SAVE && (
