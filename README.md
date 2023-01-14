@@ -1,6 +1,18 @@
 # Interview Scheduler
 
-## Setup
+## Final Product
+
+
+## Dependencies
+- axios
+- react
+- @testing-library/react-hooks
+- react-test-renderer
+- storybook
+- cypress
+- sass
+
+## Setup and Getting Started
 
 Install dependencies with `npm install`.
 
