@@ -61,7 +61,6 @@ export function getInterviewersForDay(state, day) {
     return [];
   }
   if (currentDay.interviewers) {
-    console.log(currentDay.interviewers.map(id => state.interviewers[id]))
     return currentDay.interviewers.map(id => state.interviewers[id]);
   }
 }
